@@ -6,10 +6,10 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.is;
 
-public class ReqresIn {
+public class ReqresIn extends TestBase {
 
     @Test
-    void createUser() {
+    void createUserTest() {
         String body = "{ \"name\": \"Alex\", \"job\": \"developer\" }";
 
             given()
@@ -17,7 +17,7 @@ public class ReqresIn {
                 .body(body)
                 .contentType(JSON)
                 .when()
-                .post("https://reqres.in/api/users")
+                .post("/users")
                 .then()
                 .log().status()
                 .log().body()
@@ -27,7 +27,7 @@ public class ReqresIn {
     }
 
     @Test
-    void updateUser() {
+    void updateUserTest() {
         String data = "{ \"name\": \"morpheus\", \"job\": \"qa\" }";
 
             given()
@@ -35,7 +35,7 @@ public class ReqresIn {
                 .contentType(JSON)
                 .body(data)
                 .when()
-                .put("https://reqres.in/api/users/2")
+                .put("/users/2")
                 .then()
                 .log().status()
                 .log().body()
@@ -45,11 +45,11 @@ public class ReqresIn {
     }
 
     @Test
-    void deleteUser() {
+    void deleteUserTest() {
         given()
                 .log().uri()
                 .when()
-                .delete("https://reqres.in/api/users/2")
+                .delete("/users/2")
                 .then()
                 .log().status()
                 .log().body()
@@ -57,11 +57,11 @@ public class ReqresIn {
     }
 
     @Test
-    void getYearOfSingleResource() {
+    void getYearOfSingleResourceTest() {
         given()
                 .log().uri()
                 .when()
-                .get("https://reqres.in/api/unknown/2")
+                .get("/unknown/2")
                 .then()
                 .log().status()
                 .log().body()
@@ -70,11 +70,11 @@ public class ReqresIn {
     }
 
     @Test
-    void checkPagesWithUsers() {
+    void checkPagesWithUsersTest() {
         given()
                 .log().uri()
                 .when()
-                .get("https://reqres.in/api/users?page=2")
+                .get("/users?page=2")
                 .then()
                 .log().status()
                 .log().body()
